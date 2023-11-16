@@ -46,7 +46,7 @@ obstacle_image = pygame.image.load("C:\\Users\\USER\\Desktop\\Coding Games in Py
 
 obstacle_image = pygame.transform.scale(obstacle_image, (OBSTACLE_WIDTH, 600))
 
-font = pygame.font.Font( None, 72) 
+font = pygame.font.Font( None, 96) 
 
 
 
@@ -150,19 +150,19 @@ while run:
         all_sprites.add(obstacle)
 
 
-    if bird.alive:
+if bird.alive:
+    collisions = pygame.sprite.spritecollide(bird, obstacles, False)
 
-        all_sprites.draw(screen)
-        
+if collisions:
 
-    if not bird.alive:
+    bird.alive = False 
 
-        game_over_text = font.render("Game Over", True, (128, 0, 128  ))
+    game_over_text = font.render("Game Over", True, (128, 0, 128))
 
-        screen.blit(game_over_text, (800 // 2 - game_over_text.get_width() // 2, 600 // 2 - game_over_text.get_height() // 2))
+    screen.blit(game_over_text, (800 // 2 - game_over_text.get_width() // 2, 600 // 2 - game_over_text.get_height() // 2))
 
     
-
+    
     pygame.display.flip()
 
     clock.tick(FPS)
